@@ -9,9 +9,10 @@ import scrapy
 
 class TestSpider(scrapy.Spider):
     name = "test"
-    allowed_domains = ["163.com"]
+    allowed_domains = ["163.com", "sina.com"]
     start_urls = [
-        "http://www.163.com/"
+        "http://www.163.com/",
+        "http://www.sina.com/"
     ]
 
     def parse(self, response):
@@ -32,7 +33,12 @@ class TestSpider(scrapy.Spider):
             # item['desc'] = sel.xpath('div[@class="mob-sub"]/text()')[0].extract()
             # print("result...",item['title'],item['link'],item['desc'])
 
-            yield scrapy.Request(sel.attrib['href'], callback=self.parse_article)
+            item['title'] = "title2"
+            item['link'] = "link"
+            item['desc'] = "desc"
+            yield item
+
+            # yield scrapy.Request(sel.attrib['href'], callback=self.parse_article)
 
 
     def parse_article(self, response):

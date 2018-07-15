@@ -15,6 +15,8 @@ SPIDER_MODULES = ['coindata.spiders']
 NEWSPIDER_MODULE = 'coindata.spiders'
 
 
+# DEPTH_LIMIT = 1
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'coindata (+http://www.yourdomain.com)'
 
