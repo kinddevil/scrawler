@@ -99,5 +99,4 @@ MONGODB_HOSTS='127.0.0.1'
 MONGODB_PORT=27017
 MONGODB_DBNAME='mydb'
 MONGODB_DOCNAME = 'scrapy'
-# MONGODB_URL = 'mongodb://hasql-scrapy:[pass]@hamongod07.prod.hulu.com:27000,hamongod08.prod.hulu.com:27017,hamongod09.prod.hulu.com:27017,hamongod10.prod.hulu.com:27017/scrapy?replicaSet=rs4&readPreference=secondaryPreferred&journal=true&connectTimeoutMS=10000'
 
