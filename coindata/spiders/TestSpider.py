@@ -6,6 +6,7 @@ Desc :
 """
 from coindata.items import CoindataItem
 import scrapy
+import random
 
 class TestSpider(scrapy.Spider):
     name = "test"
@@ -14,16 +15,23 @@ class TestSpider(scrapy.Spider):
         "http://www.163.com/",
         "http://www.sina.com/"
     ]
+    ua_list = [
+        'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:55.0) Gecko/20100101 Firefox/55.0',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36'
+    ]
 
     def parse(self, response):
-        print "parse..."
-        # print response.body
+
+        headers = {'User-Agent': random.choice(self.ua_list)}
+        print("parse...")
+        # print(response.body)
 
         # yield scrapy.Request("https://www.infoq.com", meta={'item_1': "item"}, callback=self.parse_article)
         # yield scrapy.Request("http://paike.zhikuxuan.com", callback=self.parse_article)
 
         for sel in response.xpath('//a'):
-            print sel, "sel..."
+            print(sel, "sel...")
             print(sel.attrib['href'])
             item = CoindataItem()
 
@@ -38,7 +46,7 @@ class TestSpider(scrapy.Spider):
             item['desc'] = "desc"
             yield item
 
-            # yield scrapy.Request(sel.attrib['href'], callback=self.parse_article)
+            # yield scrapy.Request(sel.attrib['href'], headers=headers, callback=self.parse_article)
 
 
     def parse_article(self, response):
